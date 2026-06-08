@@ -1,6 +1,6 @@
-# cosmos3-official — Spec-Compliant ComfyUI Nodes for NVIDIA Cosmos 3
+# jolly-cosmos3-comfyuinodes — Spec-Compliant ComfyUI Nodes for NVIDIA Cosmos 3
 
-Drop-in ComfyUI nodes that implement the **official Cosmos3-Nano inference path** from the [NVIDIA model card](https://huggingface.co/nvidia/Cosmos3-Nano). Routes prompts through the correct Qwen2 chat template, unified 3D mRoPE sequences, and flow-matching scheduler — matching training exactly.
+Drop-in ComfyUI nodes that implement the **jolly-cosmos3-comfyuinodes inference path** from the [NVIDIA model card](https://huggingface.co/nvidia/Cosmos3-Nano). Routes prompts through the correct Qwen2 chat template, unified 3D mRoPE sequences, and flow-matching scheduler — matching training exactly.
 
 ## Why This Exists
 
