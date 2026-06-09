@@ -62,7 +62,7 @@ def resolution_for(tier=DEFAULT_TIER, aspect=DEFAULT_ASPECT):
 
 def comfy_image_to_pil(image_tensor):
     """First frame of ComfyUI IMAGE [B,H,W,C] float32 [0,1] -> PIL.Image."""
-    img = image_tensor[0]
+    img = image_tensor[0] if image_tensor.dim() == 4 else image_tensor  # handle [B,H,W,C] or [H,W,C]
     arr = (img.clamp(0.0, 1.0).cpu().float().numpy() * 255.0).round().astype(np.uint8)
     if arr.shape[-1] == 4:
         arr = arr[:, :, :3]
