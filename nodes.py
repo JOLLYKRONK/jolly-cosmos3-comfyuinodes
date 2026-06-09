@@ -716,8 +716,11 @@ class JollyCosmos3TextToVideo:
             "callback_on_step_end": _cb,
             "enable_sound": want_sound,
             "enable_safety_check": False,
+            "add_duration_template": False,
+            "add_resolution_template": False,
         }
-        result = pipe(**_filter_kwargs(pipe.__call__, candidate))
+        call_kwargs = _filter_kwargs(pipe.__call__, candidate)
+        result = pipe(**call_kwargs)
 
         visual = _extract_visual(result, want_image=False)
         frames_out = frames_to_comfy_image(visual)
@@ -793,7 +796,9 @@ class JollyCosmos3ImageToVideo:
             device="cuda" if device.type == "cuda" else "cpu"
         ).manual_seed(int(seed))
 
+        print(f"[cosmos3-official I2V] Input image tensor shape: {image.shape}, dtype: {image.dtype}")
         pil_image = comfy_image_to_pil(image)
+        print(f"[cosmos3-official I2V] PIL image: size={pil_image.size}, mode={pil_image.mode}")
 
         candidate = {
             "prompt": prompt,
@@ -809,8 +814,13 @@ class JollyCosmos3ImageToVideo:
             "callback_on_step_end": _cb,
             "enable_sound": want_sound,
             "enable_safety_check": False,
+            "add_duration_template": False,
+            "add_resolution_template": False,
         }
-        result = pipe(**_filter_kwargs(pipe.__call__, candidate))
+        call_kwargs = _filter_kwargs(pipe.__call__, candidate)
+        print(f"[cosmos3-official I2V] prompt ({len(prompt)} chars): {prompt[:200]}...")
+        print(f"[cosmos3-official I2V] neg_prompt ({len(negative_prompt or '')} chars): {(negative_prompt or '')[:200]}...")
+        result = pipe(**call_kwargs)
 
         visual = _extract_visual(result, want_image=False)
         frames_out = frames_to_comfy_image(visual)
